@@ -88,7 +88,13 @@ function findMediaPoster($media_path, $video_filename, $allowed_images) {
                     }
                 ?>
                 <a href="/player?<?php echo urlencode($media_file); ?>">
-                    <img src="<?php echo htmlspecialchars($poster_url); ?>" alt="<?php echo htmlspecialchars($clean_title); ?>" class="w-full aspect-2/3 object-cover rounded-lg border-2 border-slate-900 hover:scale-105 duration-400 transition shadow-lg">
+                    <img src="<?php echo htmlspecialchars($poster_url); ?>"
+                        alt="<?php echo htmlspecialchars($clean_title); ?>"
+                        class="w-full aspect-2/3 object-cover rounded-lg border-2 border-slate-900 hover:scale-105 duration-400 transition shadow-lg"
+                        loading="eager"
+                        decoding="async"
+                        width="400"
+                        height="600">
                 </a>
             <?php endforeach; ?>
             <?php else: ?>

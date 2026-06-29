@@ -98,21 +98,25 @@ if ($sort_mode === 'alpha') {
             </div>
         <?php else: ?>
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 w-full">
-                <?php foreach ($media as $media): 
-                    if (!empty($media['cover_url'])) {
-                        $poster_url = $media['cover_url'];
+                <?php foreach ($media as $index => $item): 
+                    if (!empty($item['cover_url'])) {
+                        $poster_url = $item['cover_url'];
                     } else {
-                        $poster_url = "https://placehold.co/400x600/0f172a/94a3b8?text=" . urlencode($media['title']);
+                        $poster_url = "https://placehold.co/400x600/0f172a/94a3b8?text=" . urlencode($item['title']);
                     }
                 ?>
-                    <a href="/player?<?php echo htmlspecialchars($media['file_name']); ?>" class="group flex flex-col gap-2 cursor-pointer">
+                    <a href="/player?<?php echo htmlspecialchars($item['file_name']); ?>" class="group flex flex-col gap-2 cursor-pointer">
                         <div class="relative overflow-hidden rounded-lg border-2 border-slate-900 group-hover:scale-105 duration-400 transition-transform aspect-2/3">
                             <img src="<?php echo htmlspecialchars($poster_url); ?>" 
-                                 alt="<?php echo htmlspecialchars($media['title']); ?>" 
-                                 class="w-full h-full object-cover">
+                                alt="<?php echo htmlspecialchars($item['title']); ?>" 
+                                class="w-full h-full object-cover"
+                                loading="<?php echo $index < 6 ? 'eager' : 'lazy'; ?>"
+                                decoding="async"
+                                width="400"
+                                height="600">
                         </div>
                         <h4 class="text-lg font-medium tracking-wide truncate mt-1 text-slate-300 group-hover:text-white transition-colors">
-                            <?php echo htmlspecialchars($media['title']); ?>
+                            <?php echo htmlspecialchars($item['title']); ?>
                         </h4>
                     </a>
                 <?php endforeach; ?>

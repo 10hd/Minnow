@@ -57,7 +57,9 @@ if (isset($_GET['stream']) && isset($_GET['file'])) {
     header("Content-Range: bytes $start-$end/$size");
     header("Accept-Ranges: bytes");
     header("Content-Length: " . $length);
-    header("Content-Type: video/mp4");
+    $stream_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+    $mime_type = ($stream_ext === 'webm') ? 'video/webm' : 'video/mp4';
+    header("Content-Type: " . $mime_type);
 
     $buffer = 8192;
     while (!feof($fp) && ($p = ftell($fp)) <= $end) {
@@ -71,13 +73,23 @@ if (isset($_GET['stream']) && isset($_GET['file'])) {
     exit;
 }
 
-$file_name = $_SERVER['QUERY_STRING'] ?? '';
+$raw_query = $_SERVER['QUERY_STRING'] ?? '';
+$file_name = basename($raw_query);
 
-if (empty($file_name) || strpos($file_name, '..') !== false) {
-    die('Invalid media file.');
+if (!empty($raw_query) && $raw_query !== $file_name && urlencode($raw_query) !== $file_name) {
+    header("Location: /player?" . urlencode($file_name));
+    exit();
 }
 
+$full_media_path = $media_path . DIRECTORY_SEPARATOR . $file_name;
 $path_info = pathinfo($file_name);
+$extension = strtolower($path_info['extension'] ?? '');
+
+if (empty($file_name) || !in_array($extension, $config['allowed_video']) || !file_exists($full_media_path)) {
+    header("Location: /library");
+    exit();
+}
+
 $clean_title = ucwords(str_replace(['.', '_', '-'], ' ', $path_info['filename']));
 $video_url = "/player?stream=1&file=" . urlencode($file_name);
 ?>
