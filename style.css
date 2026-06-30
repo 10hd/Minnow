@@ -5,3 +5,7 @@
   font-variation-settings:
     "wdth" 100;
 }
+
+.no-cursor {
+    cursor: none !important;
+}
