@@ -1,3 +1,7 @@
+body {
+    background-color: black;
+}
+
 .cabin {
   font-family: "Cabin", sans-serif;
   font-optical-sizing: auto;

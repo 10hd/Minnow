@@ -4,7 +4,7 @@ Minnow is a self-hosted local media streaming website built with PHP, JavaScript
 
 ## Why Use it?
 
-It has a modern and responsive (for the most part, not fully responsive on mobile yet.) design.
+It has a modern and responsive design.
 
 No database required. It scans your specified directory.
 
@@ -48,4 +48,6 @@ Move your supported video files (supported formats for all files are listed in `
 
 ### Note
 If you know how to add your own formats/extensions then feel free. I tried to make it as easy as possible to do.
-Also, I mentioned before that it is not fully responsive on mobile. It technically works on mobile and smaller screens but it is not as easy to use. I havent tried much to make it responsive. I designed it to work on my 1920x1080 display.
+
+### Credits
+Logo Design: [@Remocore](https://github.com/Remorse69)
