@@ -78,7 +78,7 @@ if ($sort_mode === 'alpha') {
 
     <title>Minnow | Library</title>
 </head>
-<body class="bg-slate-950 cabin h-screen text-white bg-linear-to-b from-black via-slate-950 to-slate-950 flex flex-col">
+<body class="bg-slate-950 cabin min-h-screen text-white bg-linear-to-b from-black via-slate-950 to-slate-950 flex flex-col">
 
     <header>
         <nav class="p-5 flex items-center justify-between">
